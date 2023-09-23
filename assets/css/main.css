@@ -1,0 +1,293 @@
+body{
+    background-color:aliceblue;
+}
+
+#main{
+    height: 100%;
+}
+
+#img{
+    background-image: url('../images/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 400px;
+    margin-top: 58px;   
+}
+#imghome{
+    background-image: url('../images/bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    margin-top: 58px;   
+}
+.filter{
+    width:20%;
+    padding-top:12px;
+    margin-left:50px;
+    float:left;
+}
+
+.filterhome{
+    width:20%;
+    padding-top:12px;
+    margin-left:50px;
+    float:left;
+}
+
+.filter > *{
+    border-radius:10px;
+    margin-right:5px;
+    height:720px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.cont{
+    width:90%;
+    float:right;
+    margin-right:110px;
+    padding-top:10px;
+
+}
+
+.cont > * {
+    margin-top:16px;
+    border-radius:8px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom:20px;
+}
+.vl{
+    border-left: 6px solid green;
+    height: 60px;
+}
+
+.vr{
+    position:absolute;
+    border-left: 3px solid #920942;
+    margin-left:670px;
+    margin-top:12px;
+    height: 90%;
+}
+
+#pickeddate{
+    border: 1px solid;
+    box-shadow: 5px 10px 8px #888888;
+
+}
+#dr{
+    margin-left:2px;
+}
+.date{
+    text-align:left;
+    color:#920942;
+    font-size: 30px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#ticketinfo{
+    list-style: none;
+    text-align:center;
+    left : 13px ;
+    margin-top:55px;
+    margin-bottom:40px;
+}
+
+h5{
+    font-size:15px;
+}
+
+#prix{
+    color:rgb(184, 94, 94);
+    font-weight: bold;
+}
+
+#idtrain{
+    color: rgb(184, 94, 94);
+}
+
+#typetrain{
+    text-align:center;
+    margin-left:150px;
+    margin-top: 10px;
+    font-size:15px;
+    font-weight: bold;
+    
+}
+.infobillet{
+    color: green;
+    display: inline-block;
+}
+
+.infobillettrajetdépart{
+    color: blue;
+    display: inline-block;
+    margin-left: 85px;
+    margin-top: 70px;
+    word-wrap: break-word;
+    max-width: 90px;
+    text-align: center;
+}
+
+.infobillettrajetarrivée{
+    color: blue;
+    display: inline-block;
+    margin-left: 112px;
+    margin-top: 70px;
+    word-wrap: break-word;
+    max-width: 70px;
+    text-align: center; 
+
+}
+
+
+.station{
+    display: inline-block;
+    color: blue ; 
+    font-size: 10px;
+}
+
+
+
+
+.arrive{
+    float:right;
+    margin-right:-30px;
+    margin-top:5px;
+}
+
+.option{
+    font-weight: bold;
+}
+
+.card-arrow-down {
+    width: 40px;
+    background-color: #920942;
+    padding: 3px;
+    left: 65%;
+    border-radius: 50%;
+    position: absolute;
+    top: 82%;
+    margin-left: 88px;
+    transition: all 0.3s;
+}
+
+.card-arrow-down:hover {
+    background-color: #344767;
+    cursor: pointer;
+    
+}
+
+.card-arrow-down-flip {
+    transform: rotate(180deg);
+}
+
+.card-arrow-info {
+    width: 80%;
+    margin-left: 110px;
+    height: 520px;
+    position: relative;
+    padding: 32px;
+    background-color: rgb(255, 255, 255);
+    z-index: -100;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.277);
+    border-radius: 20px;
+    transition: all 0.3s;
+    transform: translateY(-2%);
+}
+
+.card-arrow-info-hidden {
+    opacity: 0%;
+    transform: translateY(-100%);
+}
+
+
+
+.submitbtn{
+    -webkit-text-size-adjust: 100%;
+    --r: 15px;
+    -webkit-font-smoothing: antialiased;
+    list-style: none;
+    font-feature-settings: "tnum","tnum";
+    font-family: inherit;
+    overflow: visible;
+    text-transform: none;
+    line-height: 2.1;
+    position: relative;
+    font-weight: 400;
+    white-space: nowrap;
+
+    text-align: center;
+    background-image: none;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    user-select: none;
+    touch-action: manipulation;
+    color: rgba(0,0,0,.65);
+    outline: 0;
+    border-radius: 32px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid transparent;
+    left: 61px;
+    font-size: .875rem;
+    padding: 0 1rem;
+    box-shadow: unset;
+    background-color: #920942;
+    -webkit-appearance: button;
+    max-width: 180px;
+    margin: 0 auto;
+}
+
+.time{
+
+    color: rgb(27, 27, 171);
+    font-size: 20px;
+    font-weight: bold;
+
+}
+
+.timetrajet{
+    color: green;
+    margin-left: 5px;
+    margin-right: 13px;
+}
+
+
+.trajetcorr{
+    color: blue;
+    display: inline-block;
+    margin-left: 112px;
+    margin-top: 70px;
+    text-align: center; 
+}
+
+
+.coloredletter{
+    color: red;
+    font-size: 30px;
+}
+
+.ProjectTitle{
+
+    margin-left: 25px;
+    font-size: 30px;
+
+}
+
+#page-container {
+    position: relative;
+    min-height: 60px;
+  }
+  
+  #content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
+  }
+  
+  #footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;            /* Footer height */
+  }
+  

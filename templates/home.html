@@ -1,0 +1,597 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/material-kit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body class="bg-white">
+    <div class="container position-sticky z-index-sticky ">
+        <div class="row">
+            <div class="col-12">
+                <nav
+                    class="navbar navbar-expand-lg  blur border-radius-xl z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                    <div class="container-fluid px-0">
+                        <a class="navbar-brand font-weight-bolder ms-sm-3 d-flex justify-content-center" href="#Home"
+                            data-placement="bottom">
+                            <img src="{% static './img/LOGO.png' %}" alt="123" style="height:50px; width=100px;">
+                            
+                        </a>
+                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon mt-2">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+                            <ul class="navbar-nav navbar-nav-hover ms-auto">
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">Home</i>
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false"
+                                        href="#About">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">About </i>
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false"
+                                        href="#Team">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">Team</i>
+
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </div>
+    <header class="header-2" id="Home">
+        <div class="page-header min-vh-85 relative" style="background-image: url({%static 'img/oncf.jpeg' %})">
+            <span class="mask bg-gradient-faded-secondary-vertical opacity-4 min-vh-85"></span>
+            <div class="container min-vh-85">
+
+                <div id="optimiser" class="section min-vh-85">
+                    <div class="section-center ">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="booking-opt">
+                                        <div class="hello">
+                                            optimiser
+                                        </div>
+                                        <div class="hello">
+                                            votre trajet
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="booking-form">
+                                        <form action="disponibilities" method="post">
+                                            {% csrf_token %} 
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Gare de départ</span>
+                                                        <input class="form-control" id="inputGaredepart" type="text"
+                                                            placeholder="Ma gare de départ" name="inputGaredepart"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Gare d'arrivée</span>
+                                                        <input class="form-control" id="inputGarearrivée" type="text"
+                                                            placeholder="Ma gare d'arrivée" name="inputGarearrivée"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Date de départ</span>
+                                                        <input class="form-control" type="date" name="datedepart"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <span class="form-label">Heure de départ</span>
+                                                        <input class="form-control" type="time" name="heuredepart"
+                                                            required>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-11 ms-2 ">
+                                                    <div class="form-group ms-5 ">
+                                                        <span class="fw-bold"
+                                                            style="margin-left:145px; color:#920942">Heure de
+                                                            départ</span>
+                                                        <div class="form-checkbox mt-3 ms-3" required>
+
+                                                            <div class="btn-group" role="group"
+                                                                aria-label="Basic radio toggle button group">
+
+                                                                <input type="radio" class="btn-check" name="btnradio" value="classe1"
+                                                                    id="btnradio1"  >
+                                                                <label class="btn btn-outline-secondary" for="btnradio1"> 1 <sup>ère</sup>
+                                                                    classe
+                                                                </label>
+
+                                                                <input type="radio" class="btn-check" value="classe2" name="btnradio"
+                                                                    id="btnradio2"  >
+                                                                <label class="btn btn-outline-secondary " for="btnradio2" >2 <sup>ème</sup>
+                                                                    classe</label>
+
+                                                                <input type="radio" value="Lit single" class="btn-check" name="btnradio"
+                                                                    id="btnradio3" >
+                                                                <label class="btn btn-outline-secondary " for="btnradio3"> Lit single</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <input type="submit" class="submit-button"
+                                                    value="Rechercher">
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+    <div class="card card-body blur shadow-blur bg-white mx-3 mx-md-4 mt-n8" style="border-top-left-radius: 5rem; border-top-right-radius: 5rem;border-bottom-left-radius: 5rem; border-bottom-right-radius: 5rem;">
+        <section class="pt-3 pb-4" id="About">
+            <div class="container">
+                <h1 class="mt-3 text-center text-capitalize" style="color:#344767"> About Us</h1>
+                <p class="fw-light text-center">we are a group of artificial intelligence enginnering students at the National School of Computer Science and Systems Analysis who try to apply their knowledge to solve social problems using information technology</p>
+                <div class="row">
+                    <div class="col-lg-9 mx-auto py-3">
+                        <div class="row">
+                            <div class="col-md-4 position-relative">
+                                <div class="p-3 text-center">
+                                    <img src="{% static './img/browsing.png' %}" alt="train" style="width:auto; height:100px;">
+                                    <h5 class="mt-3">Easy browsing</h5>
+                                    <p class="text-sm font-weight-normal  pt-4">In one click your optimal trajectory in your hands</p>
+                                </div>
+                                <hr class="vertical dark-version">
+                            </div>
+                            <div class="col-md-4 position-relative">
+                                <div class="p-3 text-center">
+                                    <img src="{% static './img/train.png' %}" alt="train" style="width:110px; height:100px;">
+                                    <h5 class="mt-3">All destinations by a one clic</h5>
+                                    <p class="text-sm font-weight-normal">visit anywhere in Morocco without worrying about your transportation
+                                    </p>
+                                </div>
+                                <hr class="vertical dark-version">
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 text-center">
+                                    <img src="{% static './img/save-time.png' %}" alt="train" style="height:100px;">
+                                    <h5 class="mt-3">Saving your time </h5>
+                                    <p class="text-sm font-weight-normal pt-4"> We value our customer's time  </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="pb-5 position-relative  mx-n3" style="background: rgb(146,9,66);
+          background: linear-gradient(90deg, rgba(146,9,66,1) 0%, rgba(52,71,103,1) 61%);border-bottom-left-radius: 5rem; border-bottom-right-radius: 5rem; " id="Team">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 mb-5 mt-5">
+                        <h3 class="text-white z-index-1 position-relative text-center">The Executive Team</h3>
+                        <p class="text-white opacity-8 mb-0 text-center">Let us introduce our team</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <div class="card card-profile mt-4">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                                    <a href="javascript:;">
+                                        <div class="p-3 pe-md-0">
+                                            <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/train.png' %}"
+                                                alt="image">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                                    <div class="card-body ps-lg-0">
+                                        <h5 class="mb-0">FILALI Hicham </h5>
+                                        <h6 class="" style="color:#920942">AI engineer</h6>
+                                        <p class="mb-0">AI engineer at ENSIAS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="card card-profile mt-lg-4 mt-5">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                                    <a href="javascript:;">
+                                        <div class="p-3 pe-md-0">
+                                            <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/train.png' %}"
+                                                alt="image">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                                    <div class="card-body ps-lg-0">
+                                        <h5 class="mb-0">TAIF Mohamed Amine</h5>
+                                        <h6 class="" style="color:#920942">AI engineer</h6>
+                                        <p class="mb-0">AI engineer at ENSIAS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-lg-6 col-12">
+                        <div class="card card-profile mt-4 z-index-2">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                                    <a href="javascript:;">
+                                        <div class="p-3 pe-md-0">
+                                            <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/train.png' %}"
+                                                alt="image">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                                    <div class="card-body ps-lg-0">
+                                        <h5 class="mb-0">MRABET Ahmed </h5>
+                                        <h6 class="" style="color:#920942">AI engineer</h6>
+                                        <p class="mb-0">AI engineer at ENSIAS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="card card-profile mt-lg-4 mt-5 z-index-2">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12 mt-n5">
+                                    <a href="javascript:;">
+                                        <div class="p-3 pe-md-0">
+                                            <img class="w-100 border-radius-md shadow-lg" src="{% static 'img/train.png' %}"
+                                                alt="image">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                                    <div class="card-body ps-lg-0">
+                                        <h5 class="mb-0">EZZALI Mustapha</h5>
+                                        <h6 class="" style="color:#920942">AI engineer</h6>
+                                        <p class="mb-0">AI engineer at ENSIAS</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <footer class="footer pt-3 ">
+        <div class="container">
+            <div class="row">
+            
+                
+            
+            <div class="col-lg-12">
+                <div class="text-center">
+                    <a href="#Home">
+                        <img src="{% static './img/LOGO.png' %}"  alt="main_logo" style="height:50px; width:100px;">
+                    </a>
+                    
+                    <p class="text-dark  text-sm font-weight-normal">
+                        All rights reserved. Copyright ©
+                        done by <a
+                            href="#Home" target="_blank">IDEALtrains</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script>
+        function autocomplete(inp, arr) {
+            /*the autocomplete function takes two arguments,
+            the text field element and an array of possible autocompleted values:*/
+            var currentFocus;
+            /*execute a function when someone writes in the text field:*/
+            inp.addEventListener("input", function (e) {
+                var a, b, i, val = this.value;
+                /*close any already open lists of autocompleted values*/
+                closeAllLists();
+                if (!val) { return false; }
+                currentFocus = -1;
+                /*create a DIV element that will contain the items (values):*/
+                a = document.createElement("DIV");
+                a.setAttribute("id", this.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items");
+                /*append the DIV element as a child of the autocomplete container:*/
+                this.parentNode.appendChild(a);
+                /*for each item in the array...*/
+                for (i = 0; i < arr.length; i++) {
+                    /*check if the item starts with the same letters as the text field value:*/
+                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                        /*create a DIV element for each matching element:*/
+                        b = document.createElement("DIV");
+                        /*make the matching letters bold:*/
+                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                        b.innerHTML += arr[i].substr(val.length);
+                        /*insert a input field that will hold the current array item's value:*/
+                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                        /*execute a function when someone clicks on the item value (DIV element):*/
+                        b.addEventListener("click", function (e) {
+                            /*insert the value for the autocomplete text field:*/
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            /*close the list of autocompleted values,
+                            (or any other open lists of autocompleted values:*/
+                            closeAllLists();
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            });
+            /*execute a function presses a key on the keyboard:*/
+            inp.addEventListener("keydown", function (e) {
+                var x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) {
+                    /*If the arrow DOWN key is pressed,
+                    increase the currentFocus variable:*/
+                    currentFocus++;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 38) { //up
+                    /*If the arrow UP key is pressed,
+                    decrease the currentFocus variable:*/
+                    currentFocus--;
+                    /*and and make the current item more visible:*/
+                    addActive(x);
+                } else if (e.keyCode == 13) {
+                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                    e.preventDefault();
+                    if (currentFocus > -1) {
+                        /*and simulate a click on the "active" item:*/
+                        if (x) x[currentFocus].click();
+                    }
+                }
+            });
+            function addActive(x) {
+                /*a function to classify an item as "active":*/
+                if (!x) return false;
+                /*start by removing the "active" class on all items:*/
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                /*add class "autocomplete-active":*/
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+            function removeActive(x) {
+                /*a function to remove the "active" class from all autocomplete items:*/
+                for (var i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            function closeAllLists(elmnt) {
+                /*close all autocomplete lists in the document,
+                except the one passed as an argument:*/
+                var x = document.getElementsByClassName("autocomplete-items");
+                for (var i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+            }
+            /*execute a function when someone clicks in the document:*/
+            document.addEventListener("click", function (e) {
+                closeAllLists(e.target);
+            });
+        }
+
+        var Gares = ["MARRAKECH", "BENGUERIR", "SETTAT", "BERRECHID", "CASA OASIS", "CASA VOYAGEUR",
+            "AIN SBAA", "MOHAMMEDIA", "BOUZNIKA", "SKHIRAT", "TEMARA", "RABAT AGDAL", "RABAT VILLE", "SALE", "KENITRA", "SIDI SLIMANE MEDINA",
+            "SIDI KACEM", "MEKNES", "AIN TAOUJTATE", "FES", "OUED AMLIL", "TAZA", "GUERCIF", "TAOURIRT",
+            "OUED METLILI", "EL AIOUN", "OUJDA", "EL ARIA", "YOUSSOUFIA", "BIDANE", "BOUGUEDRA", "SAFI", "SIDI EL AIDI", "TAMDROST",
+            "MOUALINE EL OUED", "RAS EL AIN", "SIDI HAJAJ", "KHOURIBGA", "OUED ZEM", "ENNASSIM", "BOUSKOURA", "AZEMMOUR", "EL JADIDA",
+            "CASA PORT", "MECHRAA BEL KSIRI", "SOUK EL ARBAA", "EL KSAR EL KEBIR", "ASILAH", "TANGER", "MELG EL OUIDANE", "HASSI BERKANE",
+            "NADOR SUD", "NADOR"]
+
+        autocomplete(document.getElementById("inputGaredepart"), Gares);
+        autocomplete(document.getElementById("inputGarearrivée"), Gares);
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
+    <script src="../assets/js/material-kit.min.js?v=3.0.2" type="text/javascript"></script>
+    <script>
+        // get the element to animate
+        var element = document.getElementById('count-stats');
+        var elementHeight = element.clientHeight;
+
+        // listen for scroll event and call animate function
+
+        document.addEventListener('scroll', animate);
+
+        // check if element is in view
+        function inView() {
+            // get window height
+            var windowHeight = window.innerHeight;
+            // get number of pixels that the document is scrolled
+            var scrollY = window.scrollY || window.pageYOffset;
+            // get current scroll position (distance from the top of the page to the bottom of the current viewport)
+            var scrollPosition = scrollY + windowHeight;
+            // get element position (distance from the top of the page to the bottom of the element)
+            var elementPosition = element.getBoundingClientRect().top + scrollY + elementHeight;
+
+            // is scroll position greater than element position? (is element in view?)
+            if (scrollPosition > elementPosition) {
+                return true;
+            }
+
+            return false;
+        }
+
+        var animateComplete = true;
+        // animate element when it is in view
+        function animate() {
+
+            // is element in view?
+            if (inView()) {
+                if (animateComplete) {
+                    if (document.getElementById('state1')) {
+                        const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+                        if (!countUp.error) {
+                            countUp.start();
+                        } else {
+                            console.error(countUp.error);
+                        }
+                    }
+                    if (document.getElementById('state2')) {
+                        const countUp1 = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+                        if (!countUp1.error) {
+                            countUp1.start();
+                        } else {
+                            console.error(countUp1.error);
+                        }
+                    }
+                    if (document.getElementById('state3')) {
+                        const countUp2 = new CountUp('state3', document.getElementById("state3").getAttribute("countTo"));
+                        if (!countUp2.error) {
+                            countUp2.start();
+                        } else {
+                            console.error(countUp2.error);
+                        };
+                    }
+                    animateComplete = false;
+                }
+            }
+        }
+
+        if (document.getElementById('typed')) {
+            var typed = new Typed("#typed", {
+                stringsElement: '#typed-strings',
+                typeSpeed: 90,
+                backSpeed: 90,
+                backDelay: 200,
+                startDelay: 500,
+                loop: true
+            });
+        }
+    </script>
+    <script>
+        if (document.getElementsByClassName('page-header')) {
+            window.onscroll = debounce(function () {
+                var scrollPosition = window.pageYOffset;
+                var bgParallax = document.querySelector('.page-header');
+                var oVal = (window.scrollY / 3);
+                bgParallax.style.transform = 'translate3d(0,' + oVal + 'px,0)';
+            }, 6);
+        }
+    </script>
+</body>
+
+</html>

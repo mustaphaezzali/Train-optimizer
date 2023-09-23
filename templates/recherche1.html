@@ -1,0 +1,383 @@
+<html>
+
+<head>
+	<title>Billet Train</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="{% static './css/main.css' %}">
+	<link rel="stylesheet" href="{% static './css/points.css' %}">
+</head>
+
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+					data-mdb-target="#navbarExample01" aria-controls="navbarExample01" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<i class="fas fa-bars"></i>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarExample01">
+					<div>
+						<img src="{% static 'images/ensias.png' %}" width="60px" height="60px">
+					</div>
+					<h5 class="ProjectTitle"><span class="coloredletter">H</span>appy <span
+							class="coloredletter">R</span>ail</h5>
+				</div>
+			</div>
+		</nav>
+		<div class="p-5 text-center bg-image" id="img">
+			<div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+				<div class="d-flex justify-content-center align-items-center h-100">
+					<div class="text-white">
+						<h1 class="mb-3">Resultats de votre recherche</h1>
+						<a class="btn btn-outline-light btn-lg" href="index.html" role="button">Effectuer une nouvelle
+							recherche</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div id="main">
+		<div id="pickeddate">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="date"> Pour le <span> 06 juin 2022 </span>: </h4>
+					<h5 class="time" style="text-align: center;">
+						<p> AIN-TAOUJTATE</p>
+						<br><br><br>
+						<img src="{% static 'images/down-arrow.png' %}" class="imgarrow">
+						<p> MARRAKECH </p>
+					</h5>
+				</div>
+			</div>
+		</div>
+		<div class="filter">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title" style="font-size:25px;">Filtrer</h5>
+					<p class="card-text">Filtrer votre recherche pour un meilleur résultat :</p>
+					<form action="filtrer" id="filt">
+						<h5 style="font-size:17px;color:darkgreen">Prix</h5>
+						<p class="option"><input type="radio" id="price1" name="price">- Du moins cher au plus
+							cher</input></p>
+						<p class="option"><input type="radio" id="price2" name="price">- Du plus cher au moins
+							cher</input></p>
+						<p class="option"><input type="radio" id="price3" name="price">- Tous</input></p>
+						<h5 style="font-size:17px;color:darkgreen">Type de train</h5>
+						<p class="option"><input type="radio" id="typetr1" name="typetr"> - Bouraq - TGV</input></p>
+						<p class="option"><input type="radio" id="typetr2" name="typetr"> - Atlas</input></p>
+						<p class="option"><input type="radio" id="typetr3" name="typetr"> - Type 3</input></p>
+						<p class="option"><input type="radio" id="typetr4" name="typetr"> - Tous</input></p>
+						<h5 style="font-size:17px;color:darkgreen">temps d'attente</h5>
+						<p class="option"><input type="radio" id="ta1" name="ta"> - Du plus courte au plus
+							longue</input></p>
+						<p class="option"><input type="radio" id="ta2" name="ta"> - Du plus longue au plus
+							courte</input></p>
+						<p class="option"><input type="radio" id="ta3" name="ta"> - Tous</input></p>
+						<br />
+						<input type="submit" value="Submit">
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="cont">
+
+			<!--ticket card start-->
+
+			<!--ticket card body-->
+
+			<div class="card w-85"
+				style="position: relative; border-radius : 20px; background-color : rgb(255, 255, 255);">
+				<div class="vr"></div>
+				<div class="card-body">
+					<div class="card-text">
+						<h5 style="transform: translate(264px,108px); font-size:12px ">
+							Correspondance
+							<!--ou bien Direct-->
+						</h5>
+						<div style="float:left">
+							<div class="infobillettrajetdépart"
+								style="text-align:center ;transform : translate(0px,-20px)">
+								<h5 style="font-size: 10px">Départ</h5>
+								<h5 class="time">08:30</h5>
+								<h5 class="station">AIN TAOUJTATE</h5>
+								<br>
+							</div>
+						</div>
+						<div id="connected" style="transform : translate(15px,60px); margin-left:100px;">
+							<div class="circle"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="circle"></div>
+						</div>
+						<div style="float:left ; transform : translate(-80px,-20px)">
+							<div class="infobillettrajetarrivée">
+								<h5 style="font-size: 10px">Arrivée</h5>
+								<h5 class="time">16:35</h5>
+								<h5 class="station">MARRAKECH</h5>
+							</div>
+						</div>
+						<div style="float:right ; transform: translate(-15px, -23px)">
+							<ul id="ticketinfo" style="margin-left:30px ;">
+								<li>
+									<h6>PRIX :</h6>
+									<h6 id="prix">150 DH</h6>
+								</li>
+							</ul>
+							<button type="button" class="submitbtn" ;
+								style="margin-right: 64px; margin-bottom:10px; transform : translate(0,-10px)">
+								<a href="https://www.oncf-voyages.ma" style="color: white ; font-weight: bold">Réserver
+									mon ticket</a>
+							</button>
+						</div>
+						<img src="{% static 'images/down-arrow.png' %}" class="card-arrow-down" id="infoButton" active="true" />
+	
+					</div>
+				</div>
+			</div>
+
+			<!--ticket card info correspendance-->
+
+			<div class="card-arrow-info card-arrow-info-hidden" id="info" style="display: none;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+
+						<td style="width: auto;">
+							<div class="circle"></div>
+						</td>
+
+						<td>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+
+						</td>
+
+						<td>
+							<div class="vcircle vcircle-int"></div>
+						</td>
+
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+					</tr>
+
+					<tr>
+						<td />
+						<td />
+						<td />
+						<td>
+							<div class="vline"></div>
+							<div class="vline"></div>
+							<div class="vline"></div>
+						</td>
+						<td />
+					</tr>
+
+					<tr>
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+
+						<td>
+							<div class="circle"></div>
+						</td>
+					
+						<td>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+						</td>
+
+						<td>
+							<div class="vcircle vcircle-int"></div>
+						</td>
+
+					
+						<td>
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+				
+							<br>
+						</td>
+					</tr>
+
+				</table>
+			</div>
+
+			<!--ticket card end -->
+
+
+			<!--additional card for testing-->
+			<!--ticket card start-->
+			
+			<!--ticket card body-->
+			
+			<div class="card w-85" style="position: relative; border-radius : 20px; background-color : rgb(255, 255, 255);">
+				<div class="vr"></div>
+				<div class="card-body">
+					<div class="card-text">
+						<h5 style="transform: translate(264px,108px); font-size:12px ">
+							Correspondance
+							<!--ou bien Direct-->
+						</h5>
+						<div style="float:left">
+							<div class="infobillettrajetdépart" style="text-align:center ;transform : translate(0px,-20px)">
+								<h5 style="font-size: 10px">Départ</h5>
+								<h5 class="time">08:30</h5>
+								<h5 class="station">AIN TAOUJTATE</h5>
+								<br>
+							</div>
+						</div>
+						<div id="connected" style="transform : translate(15px,60px); margin-left:100px;">
+							<div class="circle"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="circle"></div>
+						</div>
+						<div style="float:left ; transform : translate(-80px,-20px)">
+							<div class="infobillettrajetarrivée">
+								<h5 style="font-size: 10px">Arrivée</h5>
+								<h5 class="time">16:35</h5>
+								<h5 class="station">MARRAKECH</h5>
+							</div>
+						</div>
+						<div style="float:right ; transform: translate(-15px, -23px)">
+							<ul id="ticketinfo" style="margin-left:30px ;">
+								<li>
+									<h6>PRIX :</h6>
+									<h6 id="prix">150 DH</h6>
+								</li>
+							</ul>
+							<button type="button" class="submitbtn" ;
+								style="margin-right: 64px; margin-bottom:10px; transform : translate(0,-10px)">
+								<a href="https://www.oncf-voyages.ma" style="color: white ; font-weight: bold">Réserver
+									mon ticket</a>
+							</button>
+						</div>
+						<img src="{% static 'images/down-arrow.png' %}" class="card-arrow-down" id="infoButton" active="true" />
+			
+					</div>
+				</div>
+			</div>
+			
+			<!--ticket card info correspendance-->
+			
+			<div class="card-arrow-info card-arrow-info-hidden" id="info" style="display: none;">
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+			
+						<td style="width: auto;">
+							<div class="circle"></div>
+						</td>
+			
+						<td>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+			
+						</td>
+			
+						<td>
+							<div class="vcircle vcircle-int"></div>
+						</td>
+			
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+					</tr>
+			
+					<tr>
+						<td />
+						<td />
+						<td />
+						<td>
+							<div class="vline"></div>
+							<div class="vline"></div>
+							<div class="vline"></div>
+						</td>
+						<td />
+					</tr>
+			
+					<tr>
+						<td style="width: 12%;">
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+							<br>
+						</td>
+			
+						<td>
+							<div class="circle"></div>
+						</td>
+			
+						<td>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+							<div class="line"></div>
+						</td>
+			
+						<td>
+							<div class="vcircle vcircle-int"></div>
+						</td>
+			
+			
+						<td>
+							<h5 style="font-size: 10px">Départ</h5>
+							<h5 class="time">08:30</h5>
+							<h5 class="station">AIN TAOUJTATE</h5>
+			
+							<br>
+						</td>
+					</tr>
+			
+				</table>
+			</div>
+			
+			<!--ticket card end -->
+
+			<footer id="footer" class="text-center bg-light" style="bottom:0;width:100%;">
+				<div class="text-center p-3" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+					&copy; 2022 Copyright:
+					<a class="text-dark">qsdvbqdf</a>
+				</div>
+			</footer>
+			<script src="{% static 'js/recherche.js' %}"> </script>
+</body>
+
+</html>

@@ -1,0 +1,430 @@
+{% load static %}
+<html>
+    <head>
+        <title>Billet Train - HICHAM FILALI</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static './css/date.css' %}">
+        <link rel="stylesheet" href="{% static './css/main.css '%}">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    </head>
+    <body>
+            <header>
+                <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+                    <div class="container-fluid">
+                      <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarExample01"
+                        aria-controls="navbarExample01"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                      >
+                        <i class="fas fa-bars"></i>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarExample01">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="">Accueil</a>
+                          </li>
+                        </ul>
+                      </div>
+                      <img src="{% static 'images/ensias.png' %}" width="60px" height="60px">
+                      <h6>Hicham Filali</h6>
+                    </div>
+                  </nav>
+                  <div class="p-5 text-center bg-image" id="imghome">
+                    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+                      <div class="d-flex justify-content-center align-items-center h-100">
+                        <div class="text-white">
+                          <h1 class="mb-3">TrainTracker</h1>
+                          <br />
+                          <div class="card" id="cardrecherche">
+                            <div class="card-body">
+                          <form id="rechercherbillet" action="disponibilities" method="post">
+                            
+                            {% csrf_token %}
+
+                          <div id="station">
+                          <label for="garedepart">Gare de départ</label>
+                          <select class="form-select" id="garedepart" name="garedepart">
+                            <option>ADDAKHLA</option>
+                            <option>AEROPORT MED V</option>
+                            <option>AGADIR (SUPRAT.)</option>
+                            <option>AGDZ (SUPRAT.)</option>
+                            <option>AIN DEFALI</option>
+                            <option>AIN SBIT</option>
+                            <option>AIN SEBAA</option>
+                            <option>AIN-TAOUJDATE</option>
+                            <option>AL AKBA LHAMRA</option>
+                            <option>ASILAH</option>
+                            <option>ASSA</option>
+                            <option>AZEMMOUR HALTE</option>
+                            <option>AZROU (SUPRAT.)</option>
+                            <option>BENGUERIR</option>
+                            <option>BENI NSAR PORT</option>
+                            <option>BENI NSAR VILLE</option>
+                            <option>BENI-MELLAL</option>
+                            <option>BENI-OUKIL</option>
+                            <option>BERRECHID</option>
+                            <option>BIDANE</option>
+                            <option>BOUIZAKARNE</option>
+                            <option>BOUJDOUR</option>
+                            <option>BOUMALNE</option>
+                            <option>BOUSKOURA</option>
+                            <option>BOUZNIKA</option>
+                            <option>CASA OASIS</option>
+                            <option>CASA PORT</option>
+                            <option>CASA VOYAGEURS</option>
+                            <option>CHEBABAT</option>
+                            <option>CHEFCHAOUEN</option>
+                            <option>DALIA</option>
+                            <option>DAR EL GUEDARI</option>
+                            <option>EL AGREB</option>
+                            <option>EL AIOUN</option>
+                            <option>EL ARGOUB (SUPRA)</option>
+                            <option>EL ARIA</option>
+                            <option>EL GOUFAF</option>
+                            <option>EL HAJEB (SUPRAT.)</option>
+                            <option>EL JADIDA</option>
+                            <option>EL KHEMISSET</option>
+                            <option>EL KSAR EL KEBIR</option>
+                            <option>ELKELAA MGOUNA</option>
+                            <option>ENNASSIM</option>
+                            <option>ENNOUASSER</option>
+                            <option>EOUFOUSS (SUPRAT.)</option>
+                            <option>ERFOUD (SUPRAT.)</option>
+                            <option>ERRACHIDIA (SUPRAT.)</option>
+                            <option>ERRICH (SUPRAT.)</option>
+                            <option>ESSAOUIRA</option>
+                            <option>FACULTES</option>
+                            <option>FES</option>
+                            <option>FNIDEQ (SUPRA.)</option>
+                            <option>FOUM ZGUID</option>
+                            <option>FQUIH BEN SALAH</option>
+                            <option>GARGARATE (SUPRA)</option>
+                            <option>GUELMIMA</option>
+                            <option>GUELMIME</option>
+                            <option>GUERCIF</option>
+                            <option>HASSI BERKANE</option>
+                            <option>IGHREM</option>
+                            <option>INEZGANE (SUPRAT)</option>
+                            <option>JORF EL MELHA</option>
+                            <option>KELAA DES SRAGHNAS</option>
+                            <option>KENITRA</option>
+                            <option>KHATT AZACANE</option>
+                            <option>KHENIFRA (SUPRAT.)</option>
+                            <option>KHOURIBGA</option>
+                            <option>LAAYOUNE</option>
+                            <option>LAAYOUNE PORT</option>
+                            <option>LAMHARIZ (SUPRA)</option>
+                            <option>LARACHE</option>
+                            <option>MARRAKECH</option>
+                            <option>MARTIL</option>
+                            <option>MATMATA</option>
+                            <option>MDIQ (SUPRA.)</option>
+                            <option>MECHRA BEL KSIRI</option>
+                            <option>MECHRA BEN ABBOU</option>
+                            <option>MEKNES</option>
+                            <option>MEKNES AL AMIR</option>
+                            <option>MELG EL OUIDANE</option>
+                            <option>MERS SULTAN</option>
+                            <option>MERZOUGA (SUPRAT.)</option>
+                            <option>MIDELT (SUPRAT.)</option>
+                            <option>MOHAMMEDIA</option>
+                            <option>MOUALINE EL OUED</option>
+                            <option>MRIRT (SUPRAT.)</option>
+                            <option>MRIZIG</option>
+                            <option>MSOUN</option>
+                            <option>NADOR SUD</option>
+                            <option>NADOR VILLE</option>
+                            <option>NAIMA</option>
+                            <option>OUARZAZATE</option>
+                            <option>OUED AMLIL</option>
+                            <option>OUED METLILI</option>
+                            <option>OUED ZEM</option>
+                            <option>OUELED RAHOU</option>
+                            <option>OUEZZANE</option>
+                            <option>OUJDA</option>
+                            <option>OULAD TEIMA</option>
+                            <option>RABAT AGDAL</option>
+                            <option>RABAT VILLE</option>
+                            <option>RAS EL AIN</option>
+                            <option>RISSANI (SUPRAT.)</option>
+                            <option>SAFI</option>
+                            <option>SAFI (SUPRAT.)</option>
+                            <option>SALE</option>
+                            <option>SALE TABRIQUET</option>
+                            <option>SEBAA-AIOUN</option>
+                            <option>SELOUANE</option>
+                            <option>SETTAT</option>
+                            <option>SIDI BOU OTHMANE</option>
+                            <option>SIDI EL AIDI</option>
+                            <option>SIDI HAJJAJ</option>
+                            <option>SIDI HARAZEM</option>
+                            <option>SIDI KACEM</option>
+                            <option>SIDI RHAZOUANI</option>
+                            <option>SIDI SLIMANE MEDINA</option>
+                            <option>SIDI YAHIA</option>
+                            <option>SKHIRAT</option>
+                            <option>SMARA</option>
+                            <option>SOUK EL ARBAA</option>
+                            <option>TAMANAR</option>
+                            <option>TAMDROST</option>
+                            <option>TAMELALT (SUPRAT.)</option>
+                            <option>TAN TAN</option>
+                            <option>TAN TAN PORT</option>
+                            <option>TANGER</option>
+                            <option>TAOURIRT</option>
+                            <option>TARFAYA</option>
+                            <option>TAROUDANT</option>
+                            <option>TATA</option>
+                            <option>TAZA</option>
+                            <option>TCHIKA (SUPRA)</option>
+                            <option>TEMARA</option>
+                            <option>TETOUAN</option>
+                            <option>TINERHIR</option>
+                            <option>TINJDAD</option>
+                            <option>TISSINT</option>
+                            <option>TIZNIT</option>
+                            <option>TLETA RISSANA</option>
+                            <option>TNINE SIDI LYAMAN</option>
+                            <option>TOUABAA</option>
+                            <option>YOUSSOUFIA</option>
+                            <option>ZAG</option>
+                            <option>ZAGORA (SUPRAT.)</option>
+                            <option>ZAOUIAT CHEHCH (SUPRAT.)</option>
+                          </select>
+                          <br />
+                          <label for="garedarrive">Gare d'arrivée</label>
+                          <select class="form-select" id="garedarrive" name="garedarrive">
+                            <option>AEROPORT MED V</option>
+                            <option>ADDAKHLA</option>
+                            <option>AGADIR (SUPRAT.)</option>
+                            <option>AGDZ (SUPRAT.)</option>
+                            <option>AIN DEFALI</option>
+                            <option>AIN SBIT</option>
+                            <option>AIN SEBAA</option>
+                            <option>AIN-TAOUJDATE</option>
+                            <option>AL AKBA LHAMRA</option>
+                            <option>ASILAH</option>
+                            <option>ASSA</option>
+                            <option>AZEMMOUR HALTE</option>
+                            <option>AZROU (SUPRAT.)</option>
+                            <option>BENGUERIR</option>
+                            <option>BENI NSAR PORT</option>
+                            <option>BENI NSAR VILLE</option>
+                            <option>BENI-MELLAL</option>
+                            <option>BENI-OUKIL</option>
+                            <option>BERRECHID</option>
+                            <option>BIDANE</option>
+                            <option>BOUIZAKARNE</option>
+                            <option>BOUJDOUR</option>
+                            <option>BOUMALNE</option>
+                            <option>BOUSKOURA</option>
+                            <option>BOUZNIKA</option>
+                            <option>CASA OASIS</option>
+                            <option>CASA PORT</option>
+                            <option>CASA VOYAGEURS</option>
+                            <option>CHEBABAT</option>
+                            <option>CHEFCHAOUEN</option>
+                            <option>DALIA</option>
+                            <option>DAR EL GUEDARI</option>
+                            <option>EL AGREB</option>
+                            <option>EL AIOUN</option>
+                            <option>EL ARGOUB (SUPRA)</option>
+                            <option>EL ARIA</option>
+                            <option>EL GOUFAF</option>
+                            <option>EL HAJEB (SUPRAT.)</option>
+                            <option>EL JADIDA</option>
+                            <option>EL KHEMISSET</option>
+                            <option>EL KSAR EL KEBIR</option>
+                            <option>ELKELAA MGOUNA</option>
+                            <option>ENNASSIM</option>
+                            <option>ENNOUASSER</option>
+                            <option>EOUFOUSS (SUPRAT.)</option>
+                            <option>ERFOUD (SUPRAT.)</option>
+                            <option>ERRACHIDIA (SUPRAT.)</option>
+                            <option>ERRICH (SUPRAT.)</option>
+                            <option>ESSAOUIRA</option>
+                            <option>FACULTES</option>
+                            <option>FES</option>
+                            <option>FNIDEQ (SUPRA.)</option>
+                            <option>FOUM ZGUID</option>
+                            <option>FQUIH BEN SALAH</option>
+                            <option>GARGARATE (SUPRA)</option>
+                            <option>GUELMIMA</option>
+                            <option>GUELMIME</option>
+                            <option>GUERCIF</option>
+                            <option>HASSI BERKANE</option>
+                            <option>IGHREM</option>
+                            <option>INEZGANE (SUPRAT)</option>
+                            <option>JORF EL MELHA</option>
+                            <option>KELAA DES SRAGHNAS</option>
+                            <option>KENITRA</option>
+                            <option>KHATT AZACANE</option>
+                            <option>KHENIFRA (SUPRAT.)</option>
+                            <option>KHOURIBGA</option>
+                            <option>LAAYOUNE</option>
+                            <option>LAAYOUNE PORT</option>
+                            <option>LAMHARIZ (SUPRA)</option>
+                            <option>LARACHE</option>
+                            <option>MARRAKECH</option>
+                            <option>MARTIL</option>
+                            <option>MATMATA</option>
+                            <option>MDIQ (SUPRA.)</option>
+                            <option>MECHRA BEL KSIRI</option>
+                            <option>MECHRA BEN ABBOU</option>
+                            <option>MEKNES</option>
+                            <option>MEKNES AL AMIR</option>
+                            <option>MELG EL OUIDANE</option>
+                            <option>MERS SULTAN</option>
+                            <option>MERZOUGA (SUPRAT.)</option>
+                            <option>MIDELT (SUPRAT.)</option>
+                            <option>MOHAMMEDIA</option>
+                            <option>MOUALINE EL OUED</option>
+                            <option>MRIRT (SUPRAT.)</option>
+                            <option>MRIZIG</option>
+                            <option>MSOUN</option>
+                            <option>NADOR SUD</option>
+                            <option>NADOR VILLE</option>
+                            <option>NAIMA</option>
+                            <option>OUARZAZATE</option>
+                            <option>OUED AMLIL</option>
+                            <option>OUED METLILI</option>
+                            <option>OUED ZEM</option>
+                            <option>OUELED RAHOU</option>
+                            <option>OUEZZANE</option>
+                            <option>OUJDA</option>
+                            <option>OULAD TEIMA</option>
+                            <option>RABAT AGDAL</option>
+                            <option>RABAT VILLE</option>
+                            <option>RAS EL AIN</option>
+                            <option>RISSANI (SUPRAT.)</option>
+                            <option>SAFI</option>
+                            <option>SAFI (SUPRAT.)</option>
+                            <option>SALE</option>
+                            <option>SALE TABRIQUET</option>
+                            <option>SEBAA-AIOUN</option>
+                            <option>SELOUANE</option>
+                            <option>SETTAT</option>
+                            <option>SIDI BOU OTHMANE</option>
+                            <option>SIDI EL AIDI</option>
+                            <option>SIDI HAJJAJ</option>
+                            <option>SIDI HARAZEM</option>
+                            <option>SIDI KACEM</option>
+                            <option>SIDI RHAZOUANI</option>
+                            <option>SIDI SLIMANE MEDINA</option>
+                            <option>SIDI YAHIA</option>
+                            <option>SKHIRAT</option>
+                            <option>SMARA</option>
+                            <option>SOUK EL ARBAA</option>
+                            <option>TAMANAR</option>
+                            <option>TAMDROST</option>
+                            <option>TAMELALT (SUPRAT.)</option>
+                            <option>TAN TAN</option>
+                            <option>TAN TAN PORT</option>
+                            <option>TANGER</option>
+                            <option>TAOURIRT</option>
+                            <option>TARFAYA</option>
+                            <option>TAROUDANT</option>
+                            <option>TATA</option>
+                            <option>TAZA</option>
+                            <option>TCHIKA (SUPRA)</option>
+                            <option>TEMARA</option>
+                            <option>TETOUAN</option>
+                            <option>TINERHIR</option>
+                            <option>TINJDAD</option>
+                            <option>TISSINT</option>
+                            <option>TIZNIT</option>
+                            <option>TLETA RISSANA</option>
+                            <option>TNINE SIDI LYAMAN</option>
+                            <option>TOUABAA</option>
+                            <option>YOUSSOUFIA</option>
+                            <option>ZAG</option>
+                            <option>ZAGORA (SUPRAT.)</option>
+                            <option>ZAOUIAT CHEHCH (SUPRAT.)</option>
+                          </select>
+                          </div>
+                          <div id="dates">
+                            <label for="datedepart">Date de départ</label>
+                          <input type="date" name="datedepart" id="datedepart" data-date="" data-date-format="DD/MM/YYYY">
+                          <br />
+                          <br />
+                          <label for="tempsDépart">temps de départ</label>
+                          <input type="time" name="tempsDépart" id="datederetour">
+                          <br />
+                          <br />
+                          <hr id="hr1">
+                          <hr id="hr2">
+                          <br />
+                            </div>
+                            <div id="typeclasse">
+                              <div style="float:left;margin-left:80px">
+                              <label for="radioclasse">Mon Confort</label>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioclasse" value="1èreclasse" id="radioclasse1">
+                                <label class="form-check-label" for="radioclasse1">
+                                  1<sup>ère</sup> classe
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioclasse" value="2èmeclasse" id="radiooclasse2" checked>
+                                <label class="form-check-label" for="radiooclasse2">
+                                  2<sup>ème</sup> classe
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radioclasse" value="Lit single" id="lit_single" checked>
+                                <label class="form-check-label" for="lit_single">
+                                  Lit single
+                                </label>
+                              </div>
+                            </div>
+                            <div style="float:right;margin-right:70px">
+                              <label for="radiohoraire">Horaire</label>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radiohoraire" id="radiohoraire1">
+                                <label class="form-check-label" for="radiohoraire1">
+                                  Nuit <sup>00h-06h</sup>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radiohoraire" id="radiohoraire2" checked>
+                                <label class="form-check-label" for="radiohoraire2">
+                                  Matinée<sup>06h-12h</sup>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radiohoraire" id="radiohoraire3" checked>
+                                <label class="form-check-label" for="radiohoraire3">
+                                  Après-Midi <sup>12h-19h</sup>
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="radiohoraire" id="radiohoraire4" checked>
+                                <label class="form-check-label" for="radiohoraire4">
+                                  Soir <sup>19h-00h</sup>
+                                </label>
+                              </div>
+                            </div>
+                            </div>
+                            </div>
+                          <input class="btn btn-outline-light btn-lg" type="submit" style="color: darkred" role="button" value="Effectuer la recherche"/>
+                        </form>
+                      </div>
+                    </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </header>
+<footer id="footerhome" class="text-center bg-light" style="position:fixed;bottom:0;width:100%;">
+    <div class="text-center p-3" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+      &copy; 2022 Copyright:
+      <a class="text-dark">HICHAM FILALI</a>
+    </div>
+  </footer>
+</body>
+</html>

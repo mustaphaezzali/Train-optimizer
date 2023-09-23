@@ -1,0 +1,113 @@
+.circle {
+    width:40px;
+    height:40px;
+    border-radius:100%;
+    background-color:#920942;
+    float:left;
+ }
+ .mcircle {
+   margin-top:25px;
+   width:10px;
+   height:10px;
+   border-radius:100%;
+   margin-right: 5px;
+   margin-left: 5px;
+   background-color:#9c9d95;
+   float:left;
+}
+ 
+ .line {
+    margin-top:28px;
+    width:50px;
+    height:5px;
+    
+    background-color:#9c9d95;
+
+ }
+ .lline {
+   margin-top:28px;
+   width:30px;
+   height:5px;
+   margin-left: 5px;
+   background-color:#9c9d95;
+ }
+.rline{
+   margin-top:28px;
+   width:30px;
+   height:5px;
+   margin-right: 5px;
+   background-color:#9c9d95;
+}
+ .vline {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right:5px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    width: 4px;
+    height: 80px;
+    position: relative;
+    left: 10px;;
+    background-color:#920942;
+ }
+ 
+ .vcircle {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    background-color: #920942;
+    
+ }
+
+ .vcircle-int {
+    border-radius: 0% !important;
+    width: 40px;
+    height: 40px;
+ }
+
+ .card-info-time {
+    width: 5%;
+    height: 50px;
+    color: #920942;
+ }
+
+ .card-info-img {
+     width: 30px;
+ }
+
+ .card-info-station {
+     color: darkgreen;
+     font-weight: bold;
+ }
+
+#connected{
+    margin-left:100px;
+}
+
+.imgarrow{
+   
+   width: 45px;
+   background-color: rgb(27, 27, 171);
+   padding: 3px;
+
+   border-radius: 50%;
+   position: absolute;
+
+   transform: translate(-24px,-65px);
+
+ }
+
+
+
+
+
+
+
+ .col-lg-3{
+
+   flex:0 0 auto;
+   width:25%;
+
+ }

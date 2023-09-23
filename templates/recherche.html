@@ -1,0 +1,748 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/material-kit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %} ">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/points.css' %}">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+
+        .autocomplete {
+            position: relative;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            background-color: #f1f1f1;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        input[type=text] {
+            background-color: #f1f1f1;
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+
+        .roller {
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+
+            overflow-x: auto;
+            padding-top: 0px;
+        }
+
+        .roller a {
+            padding: 6px 8px 6px 16px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+        }
+
+        .roller a:hover {
+            color: #f1f1f1;
+        }
+
+
+
+        @media screen and (max-height: 450px) {
+            .roller {
+                padding-top: 15px;
+            }
+
+            .roller a {
+                font-size: 18px;
+            }
+        }
+
+        .card .up-border,
+        .card .down-border {
+            padding: 14px 15px;
+            background-color: #ddd;
+            border-radius: 50%;
+            position: absolute
+        }
+
+        .card .up-border {
+            top: -8px;
+            right: -35px;
+        }
+
+        .card .down-border {
+            bottom: -13px;
+            right: -35px;
+        }
+
+        .mont {
+            margin-left: 220px;
+            width: 100%;
+            height: 90%;
+            
+        }
+
+
+        .mont ul {
+            margin: 0;
+            font-size: larger;
+            margin-top: 100px;
+            list-style: none;
+            position: relative;
+            padding: 1px 100px;
+            color: #920942;
+            font-size: 13px;
+        }
+
+        .mont ul:before {
+            content: "";
+            width: 10px;
+            margin-left: 10px;
+            height: 100%;
+            position: absolute;
+            border-left: 2px dashed #920942;
+        }
+
+        .mont ul li {
+            position: relative;
+            margin-left: 30px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 14px;
+            border-radius: 6px;
+            width: 250px;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.12), 0 2px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        .mont ul li:not(:first-child) {
+            margin-top: 60px;
+        }
+
+        .mont ul li>span {
+            width: 20px;
+            height: 80px;
+            background: #920942;
+            border-radius: 50px;
+            left: -30px;
+            top: 0;
+            position: absolute;
+        }
+
+
+        .mont ul li>span:before {
+            content: "";
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            border-radius: 50%;
+            border: 2px solid #920942;
+            position: absolute;
+            background: #fff;
+            bottom: 20px;
+            left: -5px;
+            top: 0;
+
+        }
+
+        .mont ul li>span:after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            margin-left: 5px;
+            border-radius: 50%;
+            border: 2px solid #920942;
+            position: absolute;
+            background: #fff;
+            bottom: 20px;
+            left: -5px;
+            top: 100%;
+        }
+
+        .mont ul li span:after {
+            top: 89%;
+        }
+
+        .mont ul li>div {
+            margin-left: 10px;
+        }
+
+
+        .mont div .info {
+            font-weight: 300;
+        }
+
+        .mont div>div {
+            margin-top: 5px;
+        }
+
+        .mont span.number {
+            height: 100%;
+        }
+
+        .mont span.number span {
+            position: absolute;
+            font-size: 10px;
+            left: -140px;
+            font-weight: bold;
+            font-size: large;
+            margin-bottom: 20px;
+        }
+
+        .mont span.number .bont {
+            position: absolute;
+            font-size: 10px;
+            left: -70px;
+            font-weight: bold;
+            font-size: large;
+            margin-bottom: 20px;
+        }
+
+
+        .mont span.number span:first-child {
+            top: 0;
+        }
+
+        .mont span.number span:last-child {
+            top: 80%;
+        }
+    </style>
+</head>
+
+<body class="index-page bg-gray">
+    <div class="container position-sticky z-index-sticky ">
+        <div class="row">
+            <div class="col-12">
+                <nav
+                    class="navbar navbar-expand-lg  blur border-radius-xl z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                    <div class="container-fluid px-0">
+                        <a class="navbar-brand font-weight-bolder ms-sm-3 d-flex justify-content-center" href="#"
+                            rel="tooltip" data-placement="bottom" target="_blank">
+                            <img src="{% static './img/LOGO.png' %}" alt="123" style="height:50px; width=100px;">
+                        </a>
+                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon mt-2">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
+                            <ul class="navbar-nav navbar-nav-hover ms-auto">
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">Home</i>
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false"
+                                        href="#">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">About </i>
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"
+                                        id="dropdownMenuDocs" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                        <i class="material-icons opacity-6 me-2 text-2xl">Team</i>
+
+                                    </a>
+
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="page-header min-vh-70 relative" style="background-image: url({% static 'img/bg.jpg' %});">
+            <div class="mask mt-5 mb-5 h-75 " style="background-color: rgba(0, 0, 0, 0.6);margin-right: 100px;">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                    <div class="text-white ms-lg-7">
+                        <h1 class=" me-5 mt-lg-5">Résultats de votre recherche</h1>
+                        <div class=" row d-lg-block justify-content-center align-items-center me-4 mt">
+
+                            <div class="col-12 d-flex justify-content-center mx-auto">
+                                <h1 class="text-white text-uppercase" style="font-size:x-large">{{gareDepart}}</h1>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <img src="{% static 'img/previous.png' %}" alt="" style="width:40px; height: 40px;">
+                                <h1 class="text-white text-uppercase ps-3" style="font-size:x-large">{{gareArrivel}}</h1>
+                            </div>
+                        </div>
+                        <div class="row ">
+                            <div class="col-12 mt-3 d-block justify-content-center align-items-center ">
+                                <h6 class="text-capitalize fw-lighter text-center  me-lg-2 "> {{result.1.1}} </h6>
+                                <h6 class="text-capitalize fw-lighter text-center me-lg-2 "> {{confort}}</h6>
+
+                            </div>
+
+                        </div>
+                        <div class="row align-items-lg-center ">
+                            <div class="col-4 " style="margin-left:145px;margin-top:20px;">
+                                <a class="btn btn-outline-light btn-lg" href="http://127.0.0.1:8000/" role="button">
+                                    Nouvelle recherche</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+    <div class="card card-body blur shadow-blur bg-cover mx-auto mt-n6 h-100  w-95"
+        style="border-top-left-radius: 5rem; border-top-right-radius: 5rem;border-bottom-left-radius: 5rem; border-bottom-right-radius: 5rem;">
+        <section class="pt-3 pb-4" id="count-stats">
+            <h1 class="mt-3 text-center text-capitalize" style="color:#344767"> Trains disponibles</h1>
+            <hr class="horizontal dark mx-auto " style="border-top: 1px solid #8c8b8b;width:80%;">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-3">
+                    <aside class=" blur top-3 z-index-sticky shadow position-sticky my-3 start-0 end-0 mx-4 "
+                        style="border-radius:25px;">
+                        <div class="sidenav-header">
+                            <h5 class="card-title text-center" style="font-size:25px;">Filtrer</h5>
+                            <p class="card-text text-center">Filtrer votre recherche pour un meilleur résultat :</p>
+                        </div>
+                        <div class="sidebar  " id="sidenav-collapse-main">
+                            <hr class="w-70 mx-auto">
+                            <form action="filter" method="post">
+                                <div class="row">
+                                    <div class="col ms-lg-7">
+                                        <div class="form-group ">
+                                            <div class="form-checkbox" required>
+                                                <div class="btn-group-vertical" role="group"
+                                                    aria-label="Basic radio toggle button group">
+                                                    
+                                                    <input type="radio" class="btn-check" name="priorité" value="Prix" id="btnradio1">
+                                                    <label class="btn btn-outline-dark" for="btnradio1"> prix
+                                                    </label>
+
+                                                    <input type="radio" class="btn-check" name="priorité" value="Time"
+                                                        id="btnradio2" checked>
+                                                    <label class="btn btn-outline-dark " for="btnradio2">
+                                                        temps</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="w-70 mx-auto">
+                                    <div class="col ">
+                                        <div class="form-group ">
+                                            <div class="form-checkbox" required>
+                                                <div class="row">
+                                                    <div class="col" style="margin-left:110px;">
+                                                        <input type="radio" class="btn-check" name="gamme" value="Tous"
+                                                            id="btnradio9" checked>
+                                                        <label class="btn btn-outline-dark "
+                                                            for="btnradio9">Tous</label>
+                                                    </div>
+                                                    <div class="col " style="margin-left:36px;">
+                                                        <div class="btn-group" role="group"
+                                                            aria-label="Basic radio toggle button group">
+                                                            
+                                                            <input
+                                                                type="radio" class="btn-check" name="gamme" value="Al Boraq"
+                                                                id="btnradio3">
+                                                            <label class="btn btn-outline-dark" for="btnradio3">
+                                                                Al Boraq
+                                                            </label>
+                                                            
+                                                            <input type="radio" class="btn-check" name="gamme" value="TNR" id="btnradio4" >
+                                                            <label class="btn btn-outline-dark " for="btnradio4">
+                                                               &nbsp; TNR &nbsp;</label>
+                                                            
+                                                            <input type="radio" class="btn-check" name="gamme" value="Atlas"
+                                                                id="btnradio5" >
+                                                            <label class="btn btn-outline-dark " for="btnradio5">
+                                                                ATLAS</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="w-70 mx-auto">
+                                    <div class="col ms-lg-5">
+                                        <div class="form-group ">
+                                            <div class="form-checkbox" required>
+                                                <div class="btn-group-vertical" role="group"
+                                                    aria-label="Basic radio toggle button group">
+                                                    <input type="radio"
+                                                        class="btn-check" name="corr" value="Tous les trains" id="btnradio6">
+                                                    <label class="btn btn-outline-dark" for="btnradio6"> Tous les
+                                                        trains
+                                                    </label>
+                                                    <input type="radio" class="btn-check" name="corr" value="Directe"
+                                                        id="btnradio7" checked>
+                                                    <label class="btn btn-outline-dark"  for="btnradio7">
+                                                        Directe</label>
+                                                    <input type="radio" class="btn-check" name="corr" value="Corespondance" id="btnradio8"
+                                                        checked>
+                                                    <label class="btn btn-outline-dark " for="btnradio8">
+                                                        Correspondance</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="col" style="margin-left:80px;">
+                                        <input  type="submit" class="btn rounded-bottom" style="background-color:#920942"
+                                                    value="Rechercher">
+                                    </div>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-lg-9">
+                    <main class="  main main-content position-relative border-radius-lg">
+                        
+
+                        <!--ticket card start-->
+
+                        <!--ticket card body-->
+
+                        {% for traject in result %}
+                            {% if traject.9 is True %} <!-- means Correspondance exist -->
+                                <div class="cardcorr">
+
+                                    <div class="card w-lg-90 mx-lg-auto max-height-vh-20 mt-3"
+                                        style="border-radius : 20px; background-color : rgb(255, 255, 255);">
+                                        <div class="card-body d-flex">
+        
+        
+                                            <div class="col-lg-9 d-flex justify-content-center ">
+        
+                                                <div class="row d-block">
+                                                    <div class="col ">
+                                                        <h3 class="text-sm text-center text-uppercase fw-bold"
+                                                            style="color:#920942"> DÉPART</h3>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="text-uppercase text-2xl fw-bold text-center"
+                                                            style="color:#344767">
+                                                            {{traject.3}}</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h3 class="text-sm text-center fw-bold text-uppercase"
+                                                            style="color:#920942"> {{traject.2}}</h3>
+                                                    </div>
+                                                </div>
+        
+                                                <img src="{% static 'img/station.png' %}" alt="station"
+                                                    style="width:auto;height:50px;margin-top:10px;">
+                                                <div class="lline"></div>
+                                                <div class="line"></div>
+                                                <div class="rline"></div>
+                                                <div class="mcircle"></div>
+                                                <div class="mcircle"></div>
+                                                <div class="mcircle"></div>
+                                                <div class="mcircle"></div>
+        
+                                                <div class="lline"></div>
+                                                <div class="line"></div>
+                                                <div class="rline"></div> <img src="{% static 'img/station.png' %}" alt="station"
+                                                    style="width:auto;height:50px;margin-top:10px;">
+                                                <div class="row d-block">
+                                                    <div class="col ">
+                                                        <h3 class="text-sm text-center text-uppercase fw-bold"
+                                                            style="color:#920942"> Arrivée</h3>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="text-uppercase text-2xl fw-bold text-center"
+                                                            style="color:#344767">
+                                                            {{traject.13}}</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h3 class="text-sm text-center fw-bold text-uppercase"
+                                                            style="color:#920942">{{traject.12}}</h3>
+                                                    </div>
+                                                </div>
+        
+        
+                                            </div>
+        
+                                            <div class="col-lg-1 ">
+                                                <div class="vline"></div>
+                                            </div>
+                                            <div class="col-lg-2 m-lg-auto " id="ticketinfo">
+                                                <div class="d-flex justify-content-center">
+                                                    <h6>PRIX : </h6> &nbsp;&nbsp;
+                                                    <h6 id="prix">{{traject.8|add:traject.16}}</h6>
+                                                </div>
+                                                <a {{"href="|add:traject.6|safe}}>
+                                                    <button class="btn my-auto" style="background-color:#920942;">
+                                                        <span class="text-white">Réserver</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <h5 style="transform: translate(324px,-75px); font-size:12px "> Correspondance</h5>
+        
+                                        <img src="{% static 'img/down-arrow.png' %}" class="card-arrow-down" id="infoButton" active="true" />
+                                    </div>
+        
+        
+                                </div>
+                                <div class="card-arrow-info card-arrow-info-hidden h-100 " id="info" style="display:none">
+                                    <div class="mont" >
+                                        <ul style="transform : translate(0px,-90px )">
+                                            <li><span></span>
+                                                <div class="h-10">
+                                                    <h3 class="text-center text-uppercase">{{traject.2}}</h3>
+        
+                                                    <div class="row ms-3">
+                                                        <div class="col-lg-3 pt-3">
+                                                            <img src="{% static 'img/train.png' %}" alt="train" width="30px">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <div class="text-lg ms-2 fw-bold" style="color:#344767"> {{traject.7}}
+                                                            </div>
+                                                            <div class=" fw-bold text-sm">Prix: <span class="">{{traject.8}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="text-center text-uppercase mt-3">{{traject.4}}</h3>
+                                                </div><span class="number text-uppercase "><span style="width:200px;">départ :
+                                                    {{traject.3}}</span><span> Arrivée: {{traject.5}}</span></span>
+        
+                                            </li>
+        
+                                            <li><span></span>
+                                                <div>
+                                                    <h3 class="text-center text-uppercase">{{traject.10}}</h3>
+        
+                                                    <div class="row ms-3">
+                                                        <div class="col-lg-3 pt-3">
+                                                            <img src="{% static 'img/train.png' %}" alt="train" width="30px">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <div class="text-lg ms-2 fw-bold" style="color:#344767"> {{traject.15}}
+                                                            </div>
+                                                            <div class=" fw-bold text-sm">Prix: <span class="">{{traject.16}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="text-center text-uppercase mt-3">{{traject.12}}</h3>
+                                                </div><span class="number text-uppercase "><span style="width:200px;">départ :
+                                                    {{traject.11}}</span><span> Arrivée: {{traject.13}}</span></span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <h5 style="transform: translate(-525px , 220px); font-size:18px "> Correspondance</h5>
+        
+                                </div>
+                            {% else %}
+                                <div class="carddirect">
+
+                                    <div class="card w-lg-90 mx-lg-auto max-height-vh-20 mt-3"
+                                        style="border-radius : 20px; background-color : rgb(255, 255, 255);">
+                                        <div class="card-body d-flex">
+        
+        
+                                            <div class="col-lg-9 d-flex justify-content-center ">
+        
+                                                <div class="row d-block">
+                                                    <div class="col ">
+                                                        <h3 class="text-sm text-center text-uppercase fw-bold"
+                                                            style="color:#920942"> départ</h3>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="text-uppercase text-2xl fw-bold text-center"
+                                                            style="color:#344767">
+                                                            {{traject.3}}</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h3 class="text-sm text-center fw-bold text-uppercase"
+                                                            style="color:#920942">  {{traject.2}}</h3>
+                                                    </div>
+                                                </div>
+        
+                                                <img src="{% static 'img/station.png' %}" alt="station"
+                                                    style="width:auto;height:50px;margin-top:10px;">
+                                                <div class="lline"></div>
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                                <div class="line"></div>
+                                                <div class="rline"></div> <img src="{% static 'img/station.png' %}" alt="station"
+                                                    style="width:auto;height:50px;margin-top:10px;">
+                                                <div class="row d-block">
+                                                    <div class="col ">
+                                                        <h3 class="text-sm text-center text-uppercase fw-bold"
+                                                            style="color:#920942"> Arrivée</h3>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h1 class="text-uppercase text-2xl fw-bold text-center"
+                                                            style="color:#344767">
+                                                            {{traject.5}}</h1>
+                                                    </div>
+                                                    <div class="col">
+                                                        <h3 class="text-sm text-center fw-bold text-uppercase"
+                                                            style="color:#920942">  {{traject.4}}</h3>
+                                                    </div>
+                                                </div>
+        
+        
+                                            </div>
+        
+                                            <div class="col-lg-1 ">
+                                                <div class="vline"></div>
+                                            </div>
+                                            <div class="col-lg-2 m-lg-auto " id="ticketinfo">
+                                                <div class="d-flex justify-content-center">
+                                                    <h6>PRIX : </h6> &nbsp;&nbsp;
+                                                    <h6 id="prix">{{traject.8}}</h6>
+                                                </div>
+                                                <a href="https://www.oncf-voyages.ma">
+                                                    <button class="btn my-auto" style="background-color:#920942;">
+                                                        <span class="text-white">Réserver</span>
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <h5 style="transform: translate(345px,-75px); font-size:12px "> Direct</h5>
+        
+                                        <img src="{% static 'img/down-arrow.png' %}" class="card-arrow-down" id="infoButton" active="true" />
+                                    </div>
+        
+        
+                                </div>
+        
+                                <!--ticket card info correspendance-->
+        
+                                <div class="card-arrow-info card-arrow-info-hidden h-100 " id="info" style="display:none; height: 280px">
+                                    <div class="mont" >
+                                        <ul style="transform : translate(0px,-90px )">
+                                            <li><span></span>
+                                                <div class="h-10">
+                                                    <h3 class="text-center text-uppercase"> {{traject.2}}</h3>
+        
+                                                    <div class="row ms-3">
+                                                        <div class="col-lg-3 pt-3">
+                                                            <img src="{% static 'img/train.png' %}" alt="train" width="30px">
+                                                        </div>
+                                                        <div class="col-lg-9">
+                                                            <div class="text-lg ms-2 fw-bold" style="color:#344767"> {{traject.7}}
+                                                            </div>
+                                                            <div class=" fw-bold text-sm">Prix: <span class="">{{traject.8}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="text-center text-uppercase mt-3">{{traject.4}}</h3>
+                                                </div><span class="number text-uppercase "><span style="width:200px;">départ :
+                                                    {{traject.3}}</span><span> Arrivée: {{traject.5}}</span></span>
+        
+                                            </li>
+        
+                                            
+                                        </ul>
+                                    </div>
+                                    <h5 style="transform: translate(-500px , 90px); font-size:18px "> Direct</h5>
+        
+                                </div>
+                                
+                            {% endif %}
+
+    
+                        {% endfor %}
+                    
+                    </main>
+                </div>
+
+            </div>
+        </section>
+    </div>
+    <br>
+    <footer id="footer" class="text-center" style="  bottom:0;width:100%;">
+        <div class="text-center p-3 text-white-50" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+
+            <span style="color:#344767;">
+                &copy; 2022 Copyright:
+            </span>
+        </div>
+    </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"
+    integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/recherche.js' %}"> </script>
+
+</html>
